@@ -1,9 +1,23 @@
 const express = require('express');
+const bodyParser = require("body-parser");
 const settings = require("./settings");
 
 class App {
-    constructor() {
+    constructor(routes) {
         this.app = express();
+        this.app.use(bodyParser.json());
+        this.routes = routes;
+        this.init();
+    }
+
+    init() {
+        this.routes.forEach(route => {
+            if (route.hasMiddleware()) {
+                this.app[route.method](route.path, route.middleware, route.handler);
+            }
+
+            this.app[route.method](route.path, route.handler);
+        });
     }
 
     start() {

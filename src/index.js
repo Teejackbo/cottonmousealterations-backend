@@ -1,6 +1,6 @@
+require('dotenv').config();
 const App = require('./App');
-const TestController = require('./controllers/TestController');
+const routes = require("./routes");
 
-const app = new App();
+const app = new App(routes);
 app.start();
-app.route().get("/", TestController.test);
