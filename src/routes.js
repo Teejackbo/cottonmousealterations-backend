@@ -5,7 +5,7 @@ const AuthController = require("./controllers/AuthController");
 const AuthenticationMiddleware = require("./auth/AuthenticationMiddleware");
 
 module.exports = [
-    Route.get("/test", TestController.test),
+    Route.get("/test", TestController.getAll),
     Route.get("/test/:id", TestController.test),
     Route.get("/auth-required", TestController.test)
         .withMiddleware(AuthenticationMiddleware.verifyToken),
