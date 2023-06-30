@@ -6,7 +6,6 @@ class TestController {
             });
         }
 
-        console.log(req);
         return res.json({
             message: 'Hello World',
         });
