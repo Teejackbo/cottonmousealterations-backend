@@ -1,4 +1,4 @@
-const QueryBuilder = require("../db/QueryBuilder");
+const User = require("../db/models/User");
 
 class TestController {
     static async test(req, res) {
@@ -14,10 +14,8 @@ class TestController {
     }
 
     static async getAll(req, res) {
-        const query = new QueryBuilder();
-        const sql = 'SELECT * FROM migrations';
-        const result = await query.execute(sql);
-        return res.json(result);
+        const user = await User.findOne({ id: 1 });
+        return res.json(user);
     }
 }
 

@@ -10,7 +10,7 @@ class AuthenticationProvider {
     }
 
     signToken(payload) {
-        return jwt.sign(payload, this.privateKey);
+        return jwt.sign(payload, this.privateKey, { expiresIn: "1d" });
     }
 
     verifyToken(token) {

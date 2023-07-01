@@ -13,6 +13,10 @@ class Connection {
     async query(sql, params) {
         return this.connection.query(sql, params);
     }
+
+    async end() {
+        return this.connection.end();
+    }
 }
 
 module.exports = Connection;
