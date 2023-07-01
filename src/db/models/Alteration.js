@@ -3,8 +3,9 @@ const QueryBuilder = require("../QueryBuilder");
 class Alteration {
     static tableName = "alterations";
     static Status = {
-        PendingApproval: "PendingApproval",
+        PendingBusinessApproval: "PendingBusinessApproval",
         Rejected: "Rejected",
+        PendingCustomerApproval: "PendingCustomerApproval",
         PendingDeposit: "PendingDeposit",
         DepositPaid: "DepositPaid",
         InProgress: "InProgress",
@@ -29,7 +30,7 @@ class Alteration {
                 customer_name: customerName,
                 customer_email: customerEmail,
                 description,
-                status: this.Status.PendingApproval
+                status: this.Status.PendingBusinessApproval
             });
 
         const [result] = await query.execute();
@@ -38,7 +39,7 @@ class Alteration {
             customer_name: customerName,
             customer_email: customerEmail,
             description,
-            status: this.Status.PendingApproval
+            status: this.Status.PendingBusinessApproval
         });
     }
 }

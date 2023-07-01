@@ -11,20 +11,16 @@ class AlterationService {
         });
 
         const emailSender = new EmailSender();
-        try {
-            await emailSender.sendEmail({
-                to: customerEmail,
-                dynamicTemplateData: {
-                    alteration: {
-                        id: alteration.id,
-                        customerName,
-                    }
-                },
-                templateId: SettingService.get("emailTemplates.alterationCreated")
-            });
-        } catch (e) {
-            console.log(e.response.body);
-        }
+        await emailSender.sendEmail({
+            to: customerEmail,
+            dynamicTemplateData: {
+                alteration: {
+                    id: alteration.id,
+                    customerName,
+                }
+            },
+            templateId: SettingService.get("emailTemplates.alterationCreated")
+        });
 
         return alteration;
     }
