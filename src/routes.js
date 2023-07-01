@@ -1,13 +1,9 @@
 const Route = require("./Route");
-const TestController = require("./controllers/TestController");
-const OtherController = require("./controllers/OtherController");
 const AuthController = require("./controllers/AuthController");
-const AuthenticationMiddleware = require("./auth/AuthenticationMiddleware");
+const AlterationController = require("./controllers/AlterationController");
+const AlterationValidator = require("./alterations/AlterationValidator");
 
 module.exports = [
-    Route.get("/test", TestController.getAll),
-    Route.get("/test/:id", TestController.test),
-    Route.get("/auth-required", TestController.test)
-        .withMiddleware(AuthenticationMiddleware.verifyToken),
-    Route.post("/authorize", AuthController.authorize)
+    Route.post("/login", AuthController.authorize),
+    Route.post("/alteration", AlterationController.create).withMiddleware(AlterationValidator.create)
 ];

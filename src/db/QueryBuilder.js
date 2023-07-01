@@ -15,6 +15,38 @@ class QueryBuilder {
         return this;
     }
 
+    insert() {
+        this.query += 'INSERT ';
+        return this;
+    }
+
+    into(table) {
+        this.query += `INTO ${table} `;
+        return this;
+    }
+
+    values(values) {
+        this.query += '(';
+        Object.keys(values).forEach((key, index) => {
+            this.query += key;
+            if (index < Object.keys(values).length - 1) {
+                this.query += ', ';
+            }
+        });
+
+        this.query += ') ';
+        this.query += 'VALUES (';
+        Object.keys(values).forEach((key, index) => {
+            this.query += `'${values[key]}'`;
+            if (index < Object.keys(values).length - 1) {
+                this.query += ', ';
+            }
+        });
+
+        this.query += ')';
+        return this;
+    }
+
     from(table) {
         this.query += `FROM ${table} `;
         return this;
