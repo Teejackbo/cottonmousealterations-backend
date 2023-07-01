@@ -4,6 +4,7 @@ class QueryBuilder {
     constructor() {
         this.query = '';
         this.connection = new Connection();
+        this.preparedValues = [];
     }
 
     select(fields = '*') {
@@ -37,7 +38,8 @@ class QueryBuilder {
         this.query += ') ';
         this.query += 'VALUES (';
         Object.keys(values).forEach((key, index) => {
-            this.query += `'${values[key]}'`;
+            this.preparedValues.push(values[key]);
+            this.query += "?";
             if (index < Object.keys(values).length - 1) {
                 this.query += ', ';
             }
@@ -55,7 +57,8 @@ class QueryBuilder {
     where(conditions) {
         this.query += 'WHERE ';
         Object.keys(conditions).forEach((key, index) => {
-            this.query += `${key} = '${conditions[key]}'`;
+            this.preparedValues.push(conditions[key]);
+            this.query += `${key} = ?`;
             if (index < Object.keys(conditions).length - 1) {
                 this.query += ' AND ';
             }
@@ -71,7 +74,7 @@ class QueryBuilder {
 
     async execute() {
         await this.connection.connect();
-        const result = this.connection.query(this.query);
+        const result = this.connection.query(this.query, this.preparedValues);
         await this.connection.end();
         return result;
     }
