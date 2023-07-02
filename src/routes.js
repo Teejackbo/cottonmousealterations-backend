@@ -5,5 +5,5 @@ const AlterationValidator = require("./alterations/AlterationValidator");
 
 module.exports = [
     Route.post("/login", AuthController.authorize),
-    Route.post("/alteration", AlterationController.create).withMiddleware(AlterationValidator.create)
+    Route.post("/alterations", AlterationController.create).withMiddleware(AlterationValidator.create)
 ];

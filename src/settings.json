@@ -1,9 +1,12 @@
 {
-    "port": 3000,
+    "port": 3001,
     "email": {
         "enabled": false
     },
     "emailTemplates": {
         "alterationCreated": "d-20372a8e6cc5443293c3d48a06f08927"
+    },
+    "cors": {
+        "origin": ["http://localhost:3000"]
     }
 }

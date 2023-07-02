@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const settings = require("./settings");
+const cors = require("cors");
+const SettingService = require("./SettingService");
 
 class App {
     constructor(routes) {
         this.app = express();
         this.app.use(bodyParser.json());
+        this.app.use(cors(SettingService.get("cors")));
         this.routes = routes;
         this.init();
     }
@@ -21,8 +23,9 @@ class App {
     }
 
     start() {
-        this.app.listen(settings.port, () => {
-            console.log(`Server is running on port ${settings.port}`);
+        const port = SettingService.get("port");
+        this.app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
         });
     }
 
